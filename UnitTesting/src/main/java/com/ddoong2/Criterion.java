@@ -10,10 +10,10 @@ public class Criterion {
     }
 
     public Answer getAnswer() {
-        throw new UnsupportedOperationException();
+        return answer;
     }
 
     public Weight getWeight() {
-        throw new UnsupportedOperationException();
+        return weight;
     }
 }

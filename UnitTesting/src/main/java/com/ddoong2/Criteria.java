@@ -7,42 +7,41 @@ import java.util.List;
 public class Criteria implements Iterable<Criterion> {
 
     private List<Criterion> criteriaList = new ArrayList<>();
-    private int index = 0;
 
     @Override
     public Iterator<Criterion> iterator() {
-        if (isLast()) {
-            return new MyIterator(false, null);
-        }
-        return  new MyIterator(true, criteriaList.get(index++));
+        return new MyIterator(criteriaList);
     }
-
-    private boolean isLast() {
-        return index + 1 >= criteriaList.size();
-    }
-
 
     public void add(Criterion criterion) {
         criteriaList.add(criterion);
     }
 
-    public static class MyIterator implements Iterator<Criterion> {
-        private boolean isNext;
-        private Criterion criterion;
+    private class MyIterator implements Iterator<Criterion> {
+        private int position = 0;
+        private List<Criterion> data;
 
-        public MyIterator(boolean isNext, Criterion criterion) {
-            this.isNext = isNext;
-            this.criterion = criterion;
+        public MyIterator(List<Criterion> data) {
+            this.data = data;
         }
 
         @Override
         public boolean hasNext() {
-            return this.isNext;
+            if (position < this.data.size()) {
+                return true;
+            } else {
+                return false;
+            }
+
         }
 
         @Override
         public Criterion next() {
-            return this.criterion;
+            if (this.hasNext()) {
+                return this.data.get(position++);
+            } else {
+                return null;
+            }
         }
     }
 
