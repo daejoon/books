@@ -60,4 +60,10 @@ public class AssertTest {
         assertThat(account1.getName(), is(not(nullValue())));
         assertThat(account1.getName(), is(notNullValue()));
     }
+
+    @Test
+    public void testWithWorthlessAssertionComment() {
+        account.deposit(50);
+        assertThat("account balance is 100", account.getBalance(), equalTo(50));
+    }
 }
