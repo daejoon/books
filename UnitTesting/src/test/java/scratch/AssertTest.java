@@ -66,4 +66,9 @@ public class AssertTest {
         account.deposit(50);
         assertThat("account balance is 100", account.getBalance(), equalTo(50));
     }
+
+    @Test(expected = InsufficientFundsException.class)
+    public void throwsWhenWithdrawingTooMuch() {
+        account.withdraw(100);
+    }
 }

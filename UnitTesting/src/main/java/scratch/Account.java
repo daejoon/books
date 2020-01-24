@@ -27,4 +27,12 @@ public class Account {
     public String getName() {
         return this.name;
     }
+
+    public void withdraw(int withdraw) {
+        if (this.balance - withdraw < 0) {
+            throw new InsufficientFundsException();
+        }
+
+        this.balance -= withdraw;
+    }
 }
