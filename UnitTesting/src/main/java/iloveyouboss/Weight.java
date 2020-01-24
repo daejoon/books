@@ -1,4 +1,4 @@
-package com.ddoong2;
+package iloveyouboss;
 
 public enum Weight {
     MustMatch(1), DontCare(2);

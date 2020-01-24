@@ -1,4 +1,4 @@
-package com.ddoong2;
+package iloveyouboss;
 
 public interface Question {
     String getText();
