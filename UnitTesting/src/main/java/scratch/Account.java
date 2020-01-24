@@ -30,7 +30,7 @@ public class Account {
 
     public void withdraw(int withdraw) {
         if (this.balance - withdraw < 0) {
-            throw new InsufficientFundsException();
+            throw new InsufficientFundsException("balance only 0");
         }
 
         this.balance -= withdraw;

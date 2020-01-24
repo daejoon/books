@@ -1,17 +1,21 @@
 package scratch;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class AssertTest {
 
     private Account account;
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void createAccount() {
@@ -69,6 +73,25 @@ public class AssertTest {
 
     @Test(expected = InsufficientFundsException.class)
     public void throwsWhenWithdrawingTooMuch() {
+        account.withdraw(100);
+    }
+
+    @Test
+    public void throwsWhenWithdrawingTooMuchWithTryCatch() {
+
+        try {
+            account.withdraw(100);
+            fail();
+        } catch (InsufficientFundsException expected) {
+            assertThat(expected.getMessage(), equalTo("balance only 0"));
+        }
+    }
+
+    @Test
+    public void throwsWhenWithdrawingTooMuchWithRule() {
+        thrown.expect(InsufficientFundsException.class);
+        thrown.expectMessage("balance only 0");
+
         account.withdraw(100);
     }
 }
