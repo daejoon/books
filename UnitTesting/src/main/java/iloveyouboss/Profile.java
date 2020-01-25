@@ -1,7 +1,11 @@
 package iloveyouboss;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
+
+import static java.util.stream.Collectors.toList;
 
 public class Profile {
     private Map<String, Answer> answers = new HashMap<>();
@@ -20,6 +24,13 @@ public class Profile {
     public void add(Answer answer) {
 
         answers.put(answer.getQuestionText(), answer);
+    }
+
+    public List<Answer> find(Predicate<Answer> predicate) {
+
+        return answers.values().stream()
+                .filter(predicate)
+                .collect(toList());
     }
 
     public boolean match(Criteria criteria) {
